@@ -58,12 +58,12 @@ export default {
         // 按钮加载状态
         this.isSubmitting = true;
         // 异步请求
-        this.$axios.post('/authenticate/forgot-password/send-code/',submitInfo)
+        this.$axios.post('/api/find-password/sendcode/',submitInfo)
           .then(response=>{
             console.debug("发送验证码返回：",response.data)
             // 按钮加载状态
             this.isSubmitting = false;
-            if(response.data.error === 0){
+            if(response.data.code === 200){
               // 请求成功
               // 下一步
               this.findingPwdStep = 1;
@@ -73,7 +73,7 @@ export default {
             } else {
               // 请求失败
               snackbar({
-                message: response.data.message,
+                message: response.data.msg,
               });
             }
           })
@@ -168,19 +168,19 @@ export default {
         const submitInfo={
           type:loginType(),
           target: loginType() === 'email' ? document.querySelector('#findpass-email').value : document.querySelector('#findpass-phone').value,
-          verificationCode : recCodeEle.value,
+          verification_code : recCodeEle.value,
           password: newPwdEle.value
         }
         console.debug("提交新密码",submitInfo)
         // 按钮加载状态
         this.isSubmitting = true;
         // 异步请求
-        this.$axios.post('/authenticate/forgot-password/',submitInfo)
+        this.$axios.post('/api/find-password/',submitInfo)
           .then(response=>{
             console.debug("提交新密码返回：",response.data)
             // 按钮加载状态
             this.isSubmitting = false;
-            if(response.data.error === 0){
+            if(response.data.code === 200){
               // 请求成功
               // 带回登录页
               this.$router.push('/login');
@@ -190,7 +190,7 @@ export default {
             } else {
               // 请求失败
               snackbar({
-                message: response.data.message,
+                message: response.data.msg,
               });
             }
           })
@@ -240,7 +240,7 @@ export default {
         </div>
         <mdui-tabs v-if="findingPwdStep===0" value="useEmail" id="find-pwd-type">
           <mdui-tab value="useEmail" icon="email" inline @click="findPwdType = 'useEmail'">邮箱</mdui-tab>
-          <mdui-tab value="usePhone" icon="phone" inline @click="findPwdType = 'usePhone'">手机</mdui-tab>
+<!--          <mdui-tab value="usePhone" icon="phone" inline @click="findPwdType = 'usePhone'">手机</mdui-tab>-->
         </mdui-tabs>
         <div class="signup-form">
 <!--          <mdui-linear-progress :value="(findingPwdStep+1)/2"></mdui-linear-progress>-->

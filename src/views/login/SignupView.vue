@@ -48,21 +48,21 @@ export default {
         // 按钮加载状态
         this.isSubmitting = true;
         // 异步请求
-        this.$axios.post('/authenticate/register/send-code/',submitInfo)
+        this.$axios.post('/api/register/sendcode/',submitInfo)
           .then(response=>{
             console.debug("发送验证码",response)
             // 按钮加载状态
             this.isSubmitting = false;
-            if(response.data.error === 0){
+            if(response.data.code === 200){
               // 请求成功
               // 下一步
               this.signupStep = 1;
               snackbar({
-                message: response.data.message
+                message: response.data.msg
               });
             } else {
               snackbar({
-                message: response.data.message,
+                message: response.data.msg,
               });
             }
           })
@@ -87,36 +87,36 @@ export default {
       const verificationCodeEle = document.querySelector('#verification-code');
       const pwdEle = document.querySelector('#signup-pwd');
       const pwdReEle = document.querySelector('#signup-pwd-re');
-      const phoneEle = document.querySelector('#signup-phone');
+      const usernameEle = document.querySelector('#signup-username');
       const agreeUserLicenseEle = document.querySelector('#checkbox-agree-user-license');
       // 验证是否通过表单验证
       if ( emailEle.reportValidity() && verificationCodeEle.reportValidity() && pwdEle.reportValidity() && pwdReEle.reportValidity() && agreeUserLicenseEle.checked){
         const signupInfo = {
           email: emailEle.value,
-          verificationCode: verificationCodeEle.value,
+          verification_code: verificationCodeEle.value,
           password: pwdEle.value,
-          phone: phoneEle.value
+          username: usernameEle.value
         }
         // 发送注册请求
         if(pwdEle.value === pwdReEle.value){
           // 按钮加载状态
           this.isSubmitting = true;
           // 向后端异步请求
-          this.$axios.post('/authenticate/register/',signupInfo)
+          this.$axios.post('/api/register/',signupInfo)
             .then(response=>{
               console.debug("发送注册请求",response)
               // 按钮加载状态
               this.isSubmitting = false;
-              if(response.data.error === 0){
+              if(response.data.code === 200){
                 snackbar({
-                  message: response.data.message,
+                  message: response.data.msg,
                 });
                 this.signupStep = 2;
                 // 跳转到登录页
                 this.$router.push('/login');
               } else {
                 snackbar({
-                  message: response.data.message,
+                  message: response.data.msg,
                 });
               }
             })
@@ -174,7 +174,7 @@ export default {
           <mdui-text-field v-if="this.signupStep===1" icon="key" label="验证码" type="number" id="verification-code" required></mdui-text-field>
           <mdui-text-field v-if="this.signupStep===1" icon="key" label="密码" type="password" id="signup-pwd" required></mdui-text-field>
           <mdui-text-field v-if="this.signupStep===1" icon="key" label="重复密码" type="password" id="signup-pwd-re" required></mdui-text-field>
-          <mdui-text-field v-if="this.signupStep===1" icon="phone" label="手机号码（选填）" type="number" id="signup-phone"></mdui-text-field>
+          <mdui-text-field v-if="this.signupStep===1" icon="phone" label="用户名" type="text" id="signup-username"></mdui-text-field>
           <mdui-checkbox id="checkbox-agree-user-license">同意用户协议</mdui-checkbox>
         </div>
         <div class="card-others">

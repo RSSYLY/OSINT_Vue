@@ -14,13 +14,14 @@ export const useMainStore = defineStore('myStore', {
         },
         userInfo: {
             id: 0,
-            username: "",
-            email: "",
-            phone: "",
-            token: "",
-            is_superuser: false,
-            is_staff: false,
-            is_active: false,
+            username: '',
+            email: '',
+            token: '',
+            isSuperuser: false,
+            isStaff: false,
+            isActive: false,
+            dateJoined: '',
+            lastLogin: '',
         },
         userStatus: {
             isLogin: false

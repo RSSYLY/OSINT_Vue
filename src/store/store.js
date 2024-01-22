@@ -4,6 +4,7 @@ export const useMainStore = defineStore('myStore', {
     state: () => ({
         pageInfo: {
             title: "OSINT",
+            // TODO 删除该侧边栏生成方法，改为侧栏自己根据路由配置生成
             drawer:{
                 items:[
                     {

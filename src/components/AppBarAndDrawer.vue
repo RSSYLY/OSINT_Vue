@@ -49,11 +49,13 @@ export default {
 <!-- 抽屉列表和导航栏都是通过store读取 -->
   <mdui-navigation-drawer class="main-navigation-drawer" modal close-on-esc close-on-overlay-click>
     <mdui-list style="padding: 20px">
+<!--  FIXME 使用路由与函数实现动态侧栏获取    -->
       <div v-for="item in store.pageInfo.drawer.items" :key="item.title">
         <mdui-list-subheader>{{item.title}}</mdui-list-subheader>
         <mdui-list-item v-for="subItem in item.items" :key="subItem.title" :active="subItem.active" @click="routerTo(subItem.link)" rounded>{{subItem.title}}</mdui-list-item>
       </div>
       <div>
+        <!--  TODO 更改为仅搜索页 /search 下显示      -->
         <mdui-list-subheader>搜索</mdui-list-subheader>
         <mdui-list-item  v-for="(route, index) in filteredRoutes" :key="index" :to="`${parentRoute.path}/${route.path}`" rounded>{{ route.name }}</mdui-list-item>
       </div>

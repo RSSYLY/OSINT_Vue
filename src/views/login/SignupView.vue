@@ -171,10 +171,10 @@ export default {
         <mdui-linear-progress :value="(signupStep+1)/3"></mdui-linear-progress>
         <div class="signup-form">
           <mdui-text-field icon="email" label="邮箱" type="email" id="signup-email" required :disabled="this.signupStep!==0"></mdui-text-field>
-          <mdui-text-field v-if="this.signupStep===1" icon="key" label="验证码" type="number" id="verification-code" required></mdui-text-field>
+          <mdui-text-field v-if="this.signupStep===1" icon="phone" label="用户名" type="text" id="signup-username"></mdui-text-field>
           <mdui-text-field v-if="this.signupStep===1" icon="key" label="密码" type="password" id="signup-pwd" required></mdui-text-field>
           <mdui-text-field v-if="this.signupStep===1" icon="key" label="重复密码" type="password" id="signup-pwd-re" required></mdui-text-field>
-          <mdui-text-field v-if="this.signupStep===1" icon="phone" label="用户名" type="text" id="signup-username"></mdui-text-field>
+          <mdui-text-field v-if="this.signupStep===1" icon="key" label="验证码" type="number" id="verification-code" required></mdui-text-field>
           <mdui-checkbox id="checkbox-agree-user-license">同意用户协议</mdui-checkbox>
         </div>
         <div class="card-others">

@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import IndexView from "@/views/IndexView.vue";
 import LoginView from '@/views/login/LoginView.vue'
 import SignupView from "@/views/login/SignupView.vue";
 import FindPassView from "@/views/login/FindPassView.vue";
-import DashboardMainView from "@/views/main/DashboardMainView.vue";
 import {useMainStore} from "@/store/store";
 import axios from "axios";
 import {snackbar} from "mdui";
@@ -11,11 +9,6 @@ import {snackbar} from "mdui";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'index',
-      component: IndexView
-    },
     {
       path: '/login',
       name: 'login',
@@ -38,10 +31,27 @@ const router = createRouter({
     },
     {
       path:'/dashboard',
-      name:'dashboardMain',
-      component: DashboardMainView,
+      name:'dashboard',
+      component:()=>import('@/views/dashboard/DashMainView.vue'),
       children:[
       ],
+    },
+    {
+      path:'/search',
+      name:'search',
+      component:()=>import('@/views/search/SearchMainView.vue'),
+      children:[
+        {
+          path: '/search/background_info/:keyword',
+          name: '背景挖掘',
+          component: () => import('@/views/search/BackgroundInfoView.vue')
+        },
+        {
+          path:'/search/events_analysis',
+          name:'事件分析',
+          component:()=>import('@/views/search/EventsAnalysisView.vue')
+        }
+      ]
     }
   ]
 })

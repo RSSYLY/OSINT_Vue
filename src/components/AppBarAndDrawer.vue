@@ -31,6 +31,16 @@ export default {
     return {
       theme: getTheme()
     }
+  },
+  computed: {
+    parentRoute() {
+      // 找到你想要显示子路由的父路由
+      return this.$router.options.routes.find(route => route.name === 'search')
+    },
+    filteredRoutes() {
+      // 如果父路由存在并且有子路由，返回子路由，否则返回一个空数组
+      return this.parentRoute && this.parentRoute.children ? this.parentRoute.children : []
+    }
   }
 }
 </script>
@@ -42,6 +52,10 @@ export default {
       <div v-for="item in store.pageInfo.drawer.items" :key="item.title">
         <mdui-list-subheader>{{item.title}}</mdui-list-subheader>
         <mdui-list-item v-for="subItem in item.items" :key="subItem.title" :active="subItem.active" @click="routerTo(subItem.link)" rounded>{{subItem.title}}</mdui-list-item>
+      </div>
+      <div>
+        <mdui-list-subheader>搜索</mdui-list-subheader>
+        <mdui-list-item  v-for="(route, index) in filteredRoutes" :key="index" :to="`${parentRoute.path}/${route.path}`" rounded>{{ route.name }}</mdui-list-item>
       </div>
     </mdui-list>
   </mdui-navigation-drawer>

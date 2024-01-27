@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     parentRoute() {
-      // 找到你想要显示子路由的父路由
+      // 定位子路由的父路由
       return this.$router.options.routes.find(route => route.name === 'search')
     },
     filteredRoutes() {
@@ -47,7 +47,7 @@ export default {
 
 <template>
 <!-- 抽屉列表和导航栏都是通过store读取 -->
-  <mdui-navigation-drawer class="main-navigation-drawer" modal close-on-esc close-on-overlay-click>
+  <mdui-navigation-drawer class="main-navigation-drawer" close-on-esc close-on-overlay-click>
     <mdui-list style="padding: 20px">
 <!--  FIXME 使用路由与函数实现动态侧栏获取    -->
       <div v-for="item in store.pageInfo.drawer.items" :key="item.title">
@@ -55,9 +55,9 @@ export default {
         <mdui-list-item v-for="subItem in item.items" :key="subItem.title" :active="subItem.active" @click="routerTo(subItem.link)" rounded>{{subItem.title}}</mdui-list-item>
       </div>
       <div>
-        <!--  TODO 更改为仅搜索页 /search 下显示      -->
-        <mdui-list-subheader>搜索</mdui-list-subheader>
-        <mdui-list-item  v-for="(route, index) in filteredRoutes" :key="index" :to="`${parentRoute.path}/${route.path}`" rounded>{{ route.name }}</mdui-list-item>
+
+        <mdui-list-subheader v-if="store.userStatus.isLogin">搜索</mdui-list-subheader>
+        <mdui-list-item v-if="store.userStatus.isLogin" v-for="(route, index) in filteredRoutes" :key="index" @click="routerTo(route.path)" rounded>{{ route.name }}</mdui-list-item>
       </div>
     </mdui-list>
   </mdui-navigation-drawer>

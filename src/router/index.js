@@ -43,7 +43,7 @@ const router = createRouter({
       children:[
         {
           // TODO 需要修改为动态路由
-          path: '/search/background_info/:keyword',
+          path: '/search/background_info',
           name: '背景挖掘',
           component: () => import('@/views/search/BackgroundInfoView.vue')
         },
@@ -76,7 +76,6 @@ router.beforeEach((to, from, next) => {
       next();
     }
 
-    next();
   } else {
     // 没token或非登录状态（只有token也不行，必须store的userState.isLogin===true）
     // 将store中的用户信息清除

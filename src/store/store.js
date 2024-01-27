@@ -8,7 +8,7 @@ export const useMainStore = defineStore('myStore', {
             drawer:{
                 items:[
                     {
-                        title:'错误，请检查前端配置',
+                        title:'',
                     }
                 ]
             }

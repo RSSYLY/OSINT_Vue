@@ -2,15 +2,13 @@
 import {useMainStore} from "@/store/store.js";
 import {snackbar} from "mdui/functions/snackbar.js";
 import {ref} from 'vue';
-import UserManagement from '@/views/dashboard/components/UserManagement.vue'
+import UserManagement from "@/views/dashboard/compopnents/UserManagement.vue"
 
 const currentComponent = ref(null);
 
 const showUserManagement = () => {
   currentComponent.value = UserManagement;
 };
-
-
 </script>
 
 <template>

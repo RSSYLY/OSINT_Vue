@@ -1,5 +1,7 @@
+<!--账号管理-->
+
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 
 export default {
@@ -19,6 +21,10 @@ export default {
       }
     });
 
+    watch(users, (newVal) => {
+      console.log(newVal);
+    });
+
     return {
       users
     };
@@ -35,6 +41,8 @@ export default {
     </div>
   </div>
 </template>
+
+
 <style scoped>
   /* 组件的样式 */
 </style>

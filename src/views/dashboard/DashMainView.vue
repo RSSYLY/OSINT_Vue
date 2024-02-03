@@ -3,11 +3,18 @@ import {useMainStore} from "@/store/store.js";
 import {snackbar} from "mdui/functions/snackbar.js";
 import {ref} from 'vue';
 import UserManagement from "@/views/dashboard/compopnents/UserManagement.vue"
-
+import PermissionChange from "@/views/dashboard/compopnents/PermissionChange.vue";
+import UserStatistics from "@/views/dashboard/compopnents/UserStatistics.vue";
 const currentComponent = ref(null);
 
 const showUserManagement = () => {
   currentComponent.value = UserManagement;
+};
+const showPermissionChange = () => {
+  currentComponent.value = PermissionChange;
+};
+const showUserStatistics = () => {
+  currentComponent.value = UserStatistics;
 };
 </script>
 
@@ -27,10 +34,10 @@ const showUserManagement = () => {
               <mdui-list-item @click="showUserManagement">
                 <div class="mdui-list-item-content">账号管理</div>
               </mdui-list-item>
-              <mdui-list-item>
+              <mdui-list-item @click="showPermissionChange">
                 <div class="mdui-list-item-content">权限变更</div>
               </mdui-list-item>
-              <mdui-list-item>
+              <mdui-list-item @click="showUserStatistics">
                 <div class="mdui-list-item-content">用户统计</div>
               </mdui-list-item>
             </mdui-list>

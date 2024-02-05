@@ -31,7 +31,7 @@ export default {
   border-radius: 0 0  var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-extra-large);
 }
 .content{
-  height: 220px;
+  height: 320px;
   background: rgba(var(--mdui-color-surface-dim),0.5);
   border-radius: 0 0  var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-extra-large);
 }

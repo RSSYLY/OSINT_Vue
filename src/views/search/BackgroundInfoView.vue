@@ -1,37 +1,42 @@
 <script>
 import HeaderBlock from "@/components/HeaderBlock.vue";
+import SearchField from "@/components/SearchField.vue";
+
 export default {
   data(){
     return {
           header: {
             title: "背景挖掘",
-            describe: "支持各种实体的查询",
+            describe: "对指定实体对象进行查询",
             actions: [
             ],
-            imgUrl: "",
+            imgUrl:'',
             height: "600px"
+          },
+          searchField:{
+            text:"实体关键词",
+            button:[
+              {
+                text:"挖掘",
+                icon:"search",
+                subUrl:"/search/background_info/"
+              }
+            ]
           }
     }
   },
   components:{
-    HeaderBlock
+    HeaderBlock,SearchField
   }
 }
 </script>
 
 <template>
-   <HeaderBlock :config="this.header"></HeaderBlock>
-   <div class="text-container" >
-     <div class="text-field">
-       <mdui-text-field label="关键词" clearable>
-         <mdui-button-icon slot="icon" icon="search"></mdui-button-icon>
-       </mdui-text-field>
-     </div>
-   </div>
+  <HeaderBlock :config="this.header"></HeaderBlock>
+  <SearchField :config="this.searchField"></SearchField>
+  <router-view></router-view>
 </template>
 
 <style scoped>
- .text-container{
-   margin: -60px 20px 0 20px;
- }
+
 </style>

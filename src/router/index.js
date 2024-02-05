@@ -42,10 +42,17 @@ const router = createRouter({
       component:()=>import('@/views/search/SearchMainView.vue'),
       children:[
         {
-          // TODO 需要修改为动态路由
           path: '/search/background_info',
           name: '背景挖掘',
-          component: () => import('@/views/search/BackgroundInfoView.vue')
+          component: () => import('@/views/search/BackgroundInfoView.vue'),
+          children:[
+            {
+                path:'/search/background_info/:keyword',
+                name:'背景挖掘结果',
+                component:()=>import('@/views/search/BackgroundInfoListView.vue')
+
+            }
+          ]
         },
         {
           path:'/search/events_analysis',

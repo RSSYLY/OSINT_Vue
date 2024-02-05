@@ -47,7 +47,7 @@ export default {
 
 <template>
 <!-- 抽屉列表和导航栏都是通过store读取 -->
-  <mdui-navigation-drawer class="main-navigation-drawer" close-on-esc close-on-overlay-click>
+  <mdui-navigation-drawer class="main-navigation-drawer" open="true" close-on-esc close-on-overlay-click>
     <mdui-list style="padding: 20px">
 <!--  FIXME 使用路由与函数实现动态侧栏获取    -->
       <div v-for="item in store.pageInfo.drawer.items" :key="item.title">

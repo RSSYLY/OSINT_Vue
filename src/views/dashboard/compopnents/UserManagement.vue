@@ -67,7 +67,7 @@ export default {
 
 <template>
   <div>
-    <h1>账号管理</h1>
+    <h1 class="centered-title">账号管理</h1>
     <mdui-divider></mdui-divider>
     <!-- 展示用户信息 -->
     <div class="list-container" v-if="users && users.length">
@@ -80,6 +80,7 @@ export default {
               <th>用户名</th>
               <th>邮箱</th>
               <th>权限等级</th>
+              <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -87,6 +88,10 @@ export default {
               <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.is_superuser }}</td>
+              <td>
+                <mdui-button variant="elevated" icon="security">修改</mdui-button>
+                <mdui-button variant="filled" icon="delete" style="background: crimson">删除</mdui-button>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -103,8 +108,25 @@ export default {
 
 
 <style scoped>
-/* 组件的样式 */
-.mdui-table-fluid {
-  margin: 20px;
+.centered-title {
+  text-align: center;
+  margin-top: 20px;
 }
+
+.list-container{
+  margin: 20px 60px 20px 60px;
+  padding: 5px 0 5px 0;
+  display: contents;
+  flex-direction: column;
+  align-items: center;
+}
+mdui-linear-progress{
+  margin: 10px 0 10px 0;
+  width: 96%;
+}
+
+.error-container mdui-typo-display-1{
+  color: var(--mdui-color-error);
+}
+
 </style>

@@ -5,7 +5,7 @@ import {ref} from 'vue';
 import UserManagement from "@/views/dashboard/compopnents/UserManagement.vue"
 import PermissionChange from "@/views/dashboard/compopnents/PermissionChange.vue";
 import UserStatistics from "@/views/dashboard/compopnents/UserStatistics.vue";
-const currentComponent = ref(null);
+const currentComponent = ref(PermissionChange);
 
 const showUserManagement = () => {
   currentComponent.value = UserManagement;

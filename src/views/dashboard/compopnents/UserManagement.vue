@@ -6,7 +6,12 @@ import axios from 'axios';
 import {useMainStore} from "@/store/store";
 import {snackbar} from "mdui";
 
+
 export default {
+  name: "UserManagement",
+  components: {
+
+  },
   data() {
     return {
       // keyword: this.$route.params.username,  //TODO 搜索用户名
@@ -16,6 +21,7 @@ export default {
   },
   methods: {
     fetchData() {
+      // ------------获取所有用户信息----------------
       this.isLoading = true
       this.$axios.get('/api/get_all_users_info/', {
         headers: {
@@ -73,23 +79,23 @@ export default {
     <div class="list-container" v-if="users && users.length">
       <mdui-linear-progress v-if="isLoading"></mdui-linear-progress>
       <mdui-list v-if="!isLoading">
-        <div class="mdui-table-fluid">
+        <div class="mdui-table">
           <table class="mdui-table mdui-table-hoverable">
             <thead>
             <tr>
+              <th>ID</th>
               <th>用户名</th>
               <th>邮箱</th>
-              <th>权限等级</th>
               <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="user in users" :key="user.id">
+              <td>{{ user.id }}</td>
               <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
-              <td>{{ user.is_superuser }}</td>
               <td>
-                <mdui-button variant="elevated" icon="security">修改</mdui-button>
+                <mdui-button variant="elevated" icon="security" class="ChangeUser-button">修改</mdui-button>
                 <mdui-button variant="filled" icon="delete" style="background: crimson">删除</mdui-button>
               </td>
             </tr>
@@ -100,12 +106,11 @@ export default {
     </div>
     <div class="error-container" v-else>
       <mdui-icon name='error_outline'></mdui-icon>
-      <mdui-typo-display-1>没有找到相关信息</mdui-typo-display-1>
+      <mdui-typo-display>没有找到相关信息或权限不足</mdui-typo-display>
     </div>
 
   </div>
 </template>
-
 
 <style scoped>
 .centered-title {
@@ -113,20 +118,9 @@ export default {
   margin-top: 20px;
 }
 
-.list-container{
-  margin: 20px 60px 20px 60px;
-  padding: 5px 0 5px 0;
-  display: contents;
-  flex-direction: column;
-  align-items: center;
-}
-mdui-linear-progress{
-  margin: 10px 0 10px 0;
-  width: 96%;
-}
-
-.error-container mdui-typo-display-1{
+.error-container mdui-typo-display {
   color: var(--mdui-color-error);
 }
+
 
 </style>

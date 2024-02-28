@@ -9,7 +9,7 @@ export default {
   name: "PermissionChange",
   data() {
     return {
-      users: null,
+      users: [],
       isLoading: false
     };
   },
@@ -72,6 +72,7 @@ export default {
         <mdui-list-subheader>权限等级</mdui-list-subheader>
         <mdui-collapse class="item">
           <mdui-collapse-item value="item-1">
+                                 <!--    超级管理员序列        -->
             <mdui-list-item slot="header" icon="near_me">超级管理员</mdui-list-item>
             <div style="margin-left: 2.5rem">
               <mdui-list-item>
@@ -86,13 +87,13 @@ export default {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="user in users" :key="user.id">
+                    <tr v-for="user in users" :key="user.id" v-if="user.is_superuser">
                       <td>{{ user.id }}</td>
                       <td>{{ user.username }}</td>
                       <td>{{ user.email }}</td>
                       <td>
-                        <mdui-button variant="elevated" icon="security" class="ChangeUser-button">升级</mdui-button>
-                        <mdui-button variant="filled" icon="delete" style="background: crimson">降级</mdui-button>
+                        <mdui-button variant="elevated" icon="keyboard_double_arrow_up" class="up-grade">升级</mdui-button>
+                        <mdui-button variant="filled" icon="keyboard_double_arrow_down" >降级</mdui-button>
                       </td>
                     </tr>
                     </tbody>
@@ -102,12 +103,38 @@ export default {
             </div>
           </mdui-collapse-item>
           <mdui-collapse-item value="item-2">
+                                 <!--     管理员序列       -->
             <mdui-list-item slot="header" icon="near_me">管理员</mdui-list-item>
             <div style="margin-left: 2.5rem">
-              <mdui-list-item>Item 2 - subitem</mdui-list-item>
+              <mdui-list-item>
+                <div class="mdui-table">
+                  <table class="mdui-table mdui-table-hoverable">
+                    <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>用户名</th>
+                      <th>邮箱</th>
+                      <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="user in users" :key="user.id" v-if="user.is_superuser">
+                      <td>{{ user.id }}</td>
+                      <td>{{ user.username }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>
+                        <mdui-button variant="elevated" icon="keyboard_double_arrow_up" class="up-grade">升级</mdui-button>
+                        <mdui-button variant="filled" icon="keyboard_double_arrow_down" >降级</mdui-button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </mdui-list-item>
             </div>
           </mdui-collapse-item>
           <mdui-collapse-item value="item-3">
+                                <!--    普通用户序列        -->
             <mdui-list-item slot="header" icon="near_me">普通用户</mdui-list-item>
             <div style="margin-left: 2.5rem">
               <mdui-list-item>Item 3 - subitem</mdui-list-item>
